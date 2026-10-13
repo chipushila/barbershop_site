@@ -1,0 +1,27 @@
+# Render Blueprint: one Flask web service + one PostgreSQL database.
+databases:
+  - name: air-db
+    plan: free          # free Render Postgres expires; choose a paid plan for real use
+    databaseName: barbershop_db
+
+services:
+  - type: web
+    name: air-barbershop
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn backend:app --workers 2 --bind 0.0.0.0:$PORT --access-logfile -
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: DATABASE_URL
+        fromDatabase:
+          name: air-db
+          property: connectionString
+      - key: BARBERSHOP_TZ
+        value: Asia/Almaty
+      - key: FLASK_DEBUG
+        value: "0"
+      - key: ADMIN_TOKEN
+        generateValue: true

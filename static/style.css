@@ -1,0 +1,644 @@
+/* ===== Basic settings ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #FAF9F6;
+  color: #1F2E29;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+}
+
+/* Big headings use a serif font */
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: normal;
+}
+button {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* ===== Page: hero on the left, booking on the right ===== */
+.page {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ===== Hero (left side) ===== */
+/* The hero is exactly one screen tall, so the text stays visible.
+   "sticky" keeps it in place while the right side scrolls. */
+.hero {
+  width: 40%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  /* Bottom padding of 12vh keeps the text away from the bottom edge */
+  padding: 48px 48px 12vh 48px;
+  color: white;
+  display: flex;
+  align-items: flex-end;   /* text sits at the bottom of the padding */
+  /* First layer: light dark overlay (a bit stronger at the bottom so the text
+     stays readable). Second layer: the photo.
+     Path is relative to /static/style.css -> /static/images/barbershop.jpg */
+  background-image:
+    linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.10) 100%),
+    url("images/barbershop.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Fallback if the photo is missing */
+  background-color: #0F4C3A;
+}
+
+.small-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.hero h1 {
+  font-size: 56px;
+  line-height: 1.1;
+  margin: 14px 0;
+}
+
+.hero-text p {
+  max-width: 280px;
+}
+
+/* ===== Right side ===== */
+.right-side {
+  width: 60%;
+  padding: 28px 48px 40px 48px;
+}
+
+/* ===== Navigation bar ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #E5E5E0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: bold;
+  color: #0F4C3A;
+}
+
+/* Logo image next to the brand name */
+.brand-logo {
+  display: block;
+  height: 40px;
+  max-height: 40px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  padding: 4px 16px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #1F2E29;
+  text-decoration: none;
+  border-left: 1px solid #E5E5E0;
+}
+
+.menu li:first-child a {
+  border-left: none;
+}
+
+.menu a:hover {
+  color: #0F4C3A;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* ===== Headings in the booking section ===== */
+.orange-label {
+  margin: 0;
+  color: #0F4C3A;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 44px;
+  margin: 8px 0 30px 0;
+  color: #093427;
+}
+
+/* ===== Form: choices on the left, summary on the right ===== */
+/* align-items: flex-start is REQUIRED for the sticky summary card:
+   with the default "stretch" the card would be as tall as the form
+   and would have no room to move. */
+#booking-form {
+  display: flex;
+  align-items: flex-start;
+}
+
+.choices {
+  flex: 1;
+  margin-right: 36px;
+}
+
+.step {
+  margin-bottom: 28px;
+}
+
+.step h3 {
+  display: flex;
+  align-items: center;
+  margin: 0 0 12px 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Small green circle with the step number */
+.number {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  border: 1px solid #0F4C3A;
+  border-radius: 50%;
+  background-color: #0F4C3A;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* A row of buttons */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ===== Barber cards ===== */
+.barber-button {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 14px;
+  text-align: left;
+  background-color: white;
+  color: #1F2E29;
+  border: 1px solid #E5E5E0;
+  border-radius: 14px;
+}
+
+.initials {
+  width: 44px;
+  height: 44px;
+  margin-right: 12px;
+  border-radius: 50%;
+  background-color: #E3EEE8;
+  color: #0F4C3A;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.barber-text strong {
+  display: block;
+}
+
+.barber-text span {
+  color: #6b7a74;
+  font-size: 14px;
+}
+
+/* Green checkmark (only visible on the selected item) */
+.check {
+  display: none;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #0F4C3A;
+  color: white;
+  font-size: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.barber-button.selected {
+  border: 2px solid #0F4C3A;
+  background-color: #F1F7F4;
+}
+
+.barber-button.selected .check {
+  display: flex;
+}
+
+/* ===== Date buttons ===== */
+.date-button {
+  flex: 1;
+  min-width: 70px;
+  padding: 12px 0;
+  background-color: white;
+  color: #1F2E29;
+  border: 1px solid #E5E5E0;
+  border-radius: 14px;
+}
+
+.day {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.day-number {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+
+/* Selected date: dark green */
+.date-button.selected {
+  background-color: #0F4C3A;
+  border-color: #0F4C3A;
+  color: white;
+}
+
+/* ===== Time buttons ===== */
+.time-button {
+  flex: 1;
+  min-width: 70px;
+  padding: 12px 0;
+  background-color: white;
+  color: #1F2E29;
+  border: 1px solid #E5E5E0;
+  border-radius: 14px;
+}
+
+/* Selected time: dark green */
+.time-button.selected {
+  background-color: #0F4C3A;
+  border-color: #0F4C3A;
+  color: white;
+}
+
+/* Booked time: light gray, gray text and a line through it */
+.time-button.booked {
+  background-color: #ECECE8;
+  border-color: #E5E5E0;
+  color: #9A9A94;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+/* Border turns green when the mouse is over a button */
+.barber-button:hover,
+.date-button:hover,
+.time-button:hover {
+  border-color: #0F4C3A;
+}
+
+/* A booked time does not react to the mouse */
+.time-button.booked:hover {
+  border-color: #E5E5E0;
+}
+
+/* ===== Name and phone inputs ===== */
+.inputs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.input-box {
+  flex: 1;
+}
+
+.input-box label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #E5E5E0;
+  border-radius: 12px;
+  font-size: 15px;
+  background-color: white;
+}
+
+.input-box input:hover {
+  border-color: #0F4C3A;
+}
+
+/* Red message under an input */
+.error {
+  min-height: 18px;
+  margin: 4px 0 0 0;
+  color: #b3261e;
+  font-size: 12px;
+}
+
+/* ===== Summary card ===== */
+.summary {
+  width: 290px;
+  padding: 28px;
+  border-radius: 24px;
+  background-color: #0F4C3A;
+  color: white;
+
+  /* Sticky: the card follows the user while the form scrolls */
+  position: sticky;
+  top: 24px;
+  /* If many services are selected, the card scrolls inside itself
+     instead of being cut off at the bottom of the screen */
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.summary-title {
+  margin: 0 0 20px 0;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #D4B76A;
+}
+
+.summary-label {
+  margin: 16px 0 0 0;
+  font-size: 12px;
+  color: #B9D1C8;
+}
+
+.summary-text {
+  margin: 2px 0 0 0;
+  font-size: 17px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.price {
+  font-family: Georgia, serif;
+  font-size: 30px;
+}
+
+/* Gold confirm button (matches the logo) */
+.confirm-button {
+  width: 100%;
+  margin-top: 22px;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background-color: #D4B76A;
+  color: #093427;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.confirm-button:hover {
+  background-color: #E3C97F;
+}
+
+/* ===== Services, contact and footer ===== */
+.info-section {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #E5E5E0;
+}
+
+.info-section h3 {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+  color: #093427;
+}
+
+.info-section p {
+  margin: 0;
+  color: #6b7a74;
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 12px;
+  color: #6b7a74;
+}
+
+/* ===== Confirmation message ===== */
+/* Hidden at first. JavaScript adds the class "show" to open it. */
+.message-background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(9, 52, 39, 0.75);
+  justify-content: center;
+  align-items: center;
+}
+
+.message-background.show {
+  display: flex;
+}
+
+.message-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: #FAF9F6;
+}
+
+.message-box h3 {
+  margin: 0 0 10px 0;
+  font-size: 28px;
+  color: #093427;
+}
+
+.note {
+  font-size: 12px;
+  color: #6b7a74;
+}
+
+.close-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background-color: #0F4C3A;
+  color: white;
+  font-weight: bold;
+}
+
+.close-button:hover {
+  background-color: #093427;
+}
+
+/* ===== Keyboard focus: green outline ===== */
+button:focus,
+input:focus,
+a:focus {
+  outline: 3px solid #0F4C3A;
+  outline-offset: 2px;
+}
+
+/* On dark green surfaces use a gold outline so it stays visible */
+.summary button:focus {
+  outline-color: #D4B76A;
+}
+
+/* ===== Tablet: summary goes under the choices ===== */
+@media (max-width: 1100px) {
+  #booking-form {
+    flex-direction: column;
+  }
+
+  .choices {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .summary {
+    width: 100%;
+    /* No sticking when the layout is stacked */
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+/* ===== Mobile: everything is stacked ===== */
+@media (max-width: 800px) {
+  .page {
+    flex-direction: column;
+  }
+
+  /* On mobile the hero is a normal block at the top */
+  .hero {
+    width: 100%;
+    height: auto;
+    min-height: 260px;
+    position: static;
+    align-self: stretch;
+    padding: 24px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .right-side {
+    width: 100%;
+    padding: 24px 20px 40px 20px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .menu a {
+    padding: 4px 10px;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+
+  .inputs {
+    flex-direction: column;
+  }
+}
+
+/* =====================================================================
+   Multi-service booking additions
+   ===================================================================== */
+
+/* ----- Services (step 1) ----- */
+.service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.service-button {
+  position: relative; display: flex; flex-direction: column; gap: 4px;
+  padding: 14px 40px 14px 14px; text-align: left;
+  background-color: white; color: #1F2E29;
+  border: 1px solid #E5E5E0; border-radius: 14px;
+}
+.service-button strong { font-size: 14px; }
+.service-meta { display: flex; justify-content: space-between; gap: 8px; color: #6b7a74; font-size: 13px; }
+.service-button:hover { border-color: #0F4C3A; }
+.service-button.selected { border: 2px solid #0F4C3A; background-color: #F1F7F4; padding: 13px 39px 13px 13px; }
+.service-button.selected .check { display: flex; }
+
+/* ----- Times: 15-minute slots need a more compact button ----- */
+.time-row .time-button { flex: 0 0 auto; min-width: 66px; padding: 10px 0; }
+
+/* ----- Loading / empty / error states ----- */
+.state-note { margin: 0; color: #6b7a74; font-size: 14px; width: 100%; }
+.state-box {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  margin-bottom: 20px; padding: 14px 16px; border-radius: 12px; font-size: 14px;
+}
+.state-box[hidden] { display: none; }
+.state-error { background: #fdecea; color: #b3261e; border: 1px solid #f5c6c2; }
+.retry-button {
+  padding: 8px 14px; border: none; border-radius: 10px;
+  background: #0F4C3A; color: white; font-weight: bold;
+}
+.retry-button:hover { background: #093427; }
+
+/* ----- Summary card ----- */
+.summary-services { list-style: none; margin: 6px 0 0 0; padding: 0; }
+.summary-services li {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 6px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.15); font-size: 14px;
+}
+.summary-services li:last-child { border-bottom: none; }
+.summary-services .line { display: flex; justify-content: space-between; gap: 8px; }
+.summary-services .sub { color: #B9D1C8; font-size: 12px; }
+.summary-empty { color: #B9D1C8; }
+.summary-pair { display: flex; gap: 24px; }
+.summary-error { min-height: 18px; margin: 10px 0 0 0; color: #ffc9c4; font-size: 13px; }
+.confirm-button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ----- Services overview + confirmation modal ----- */
+.services-overview { list-style: none; margin: 0; padding: 0; color: #6b7a74; }
+.services-overview li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+.message-box .m-line { display: flex; justify-content: space-between; gap: 8px; margin: 4px 0; }
+.message-box .m-total { margin-top: 10px; padding-top: 10px; border-top: 1px solid #E5E5E0; font-weight: bold; }
+.message-box #message-text { margin-bottom: 20px; }
+
+@media (max-width: 800px) {
+  .service-grid { grid-template-columns: 1fr; }
+  .barber-button { min-width: 100%; }
+}

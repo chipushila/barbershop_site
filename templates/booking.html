@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIR Barbershop - Astana</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="page">
+
+    <!-- ===== LEFT SIDE: hero picture and text ===== -->
+    <header class="hero">
+      <div class="hero-text">
+        <p class="small-label">AIR BARBERSHOP · ASTANA · SINCE 2026</p>
+        <h1>Good style.<br>Easy booking.</h1>
+        <p>Professional cuts in a calm and friendly space.</p>
+      </div>
+    </header>
+
+    <!-- ===== RIGHT SIDE: booking ===== -->
+    <main class="right-side">
+
+      <!-- Navigation bar -->
+      <nav class="navbar">
+        <div class="brand">
+          <span>AIR Barbershop</span>
+        </div>
+        <ul class="menu">
+          <li><a href="#booking">BOOKING</a></li>
+          <li><a href="#services">SERVICES</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+
+      <!-- Booking section -->
+      <section id="booking">
+        <p class="orange-label">BOOK YOUR VISIT</p>
+        <h2>Choose what you need</h2>
+
+        <!-- Shown if the initial load fails -->
+        <div class="state-box state-error" id="load-error" hidden role="alert">
+          <span id="load-error-text">Could not load the booking data.</span>
+          <button type="button" class="retry-button" id="retry-button">Try again</button>
+        </div>
+
+        <form id="booking-form" novalidate>
+
+          <!-- Left part of the form: the choices -->
+          <div class="choices">
+
+            <!-- Step 1: services (multi-select, loaded from the database) -->
+            <div class="step">
+              <h3><span class="number">1</span> Select services</h3>
+              <div class="service-grid" id="service-list">
+                <p class="state-note">Loading services…</p>
+              </div>
+              <p class="error" id="service-error"></p>
+            </div>
+
+            <!-- Step 2: barber -->
+            <div class="step">
+              <h3><span class="number">2</span> Select barber</h3>
+              <div class="button-row" id="barber-list">
+                <p class="state-note">Loading barbers…</p>
+              </div>
+            </div>
+
+            <!-- Step 3: date -->
+            <div class="step">
+              <h3><span class="number">3</span> Select date</h3>
+              <div class="button-row" id="date-list"></div>
+            </div>
+
+            <!-- Step 4: time -->
+            <div class="step">
+              <h3><span class="number">4</span> Select time</h3>
+              <div class="button-row time-row" id="time-list" aria-live="polite">
+                <p class="state-note">Select services to see available times.</p>
+              </div>
+              <p class="error" id="time-error"></p>
+            </div>
+
+            <!-- Customer information: first name and last name -->
+            <div class="inputs">
+              <div class="input-box">
+                <label for="first-name">First name</label>
+                <input type="text" id="first-name" placeholder="Enter your first name" autocomplete="given-name">
+                <p class="error" id="first-name-error"></p>
+              </div>
+              <div class="input-box">
+                <label for="last-name">Last name</label>
+                <input type="text" id="last-name" placeholder="Enter your last name" autocomplete="family-name">
+                <p class="error" id="last-name-error"></p>
+              </div>
+            </div>
+
+            <!-- Customer information: phone number -->
+            <div class="inputs">
+              <div class="input-box">
+                <label for="phone">Phone number</label>
+                <input type="text" id="phone" placeholder="+7 777 123 45 67" autocomplete="tel">
+                <p class="error" id="phone-error"></p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right part of the form: summary card -->
+          <div class="summary">
+            <p class="summary-title">YOUR BOOKING</p>
+
+            <p class="summary-label">Services</p>
+            <ul class="summary-services" id="summary-services">
+              <li class="summary-empty">No services selected</li>
+            </ul>
+
+            <p class="summary-label">Barber</p>
+            <p class="summary-text" id="summary-barber">—</p>
+
+            <p class="summary-label">Date</p>
+            <p class="summary-text" id="summary-date">—</p>
+
+            <div class="summary-pair">
+              <div>
+                <p class="summary-label">Start</p>
+                <p class="summary-text" id="summary-time">—</p>
+              </div>
+              <div>
+                <p class="summary-label">End</p>
+                <p class="summary-text" id="summary-end">—</p>
+              </div>
+            </div>
+
+            <p class="summary-label">Total duration</p>
+            <p class="summary-text" id="summary-duration">0 min</p>
+
+            <div class="total-row">
+              <span>Total</span>
+              <span class="price" id="summary-total">₸0.00</span>
+            </div>
+
+            <button type="submit" class="confirm-button" id="confirm-button">CONFIRM BOOKING</button>
+            <p class="summary-error" id="form-error" role="alert"></p>
+          </div>
+
+        </form>
+      </section>
+
+      <!-- Services section (filled from the same API) -->
+      <section id="services" class="info-section">
+        <h3>Services</h3>
+        <ul class="services-overview" id="services-overview"></ul>
+      </section>
+
+      <!-- Contact section -->
+      <section id="contact" class="info-section">
+        <h3>Contact</h3>
+        <p>AIR Barbershop, Astana, Kazakhstan. Open every day 10:00 - 20:00.</p>
+      </section>
+
+      <footer>
+        <p>&copy; AIR Barbershop Astana</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Confirmation message (filled from the server's saved booking) -->
+  <div class="message-background" id="message">
+    <div class="message-box">
+      <h3>Booking confirmed</h3>
+      <div id="message-text"></div>
+      <button type="button" class="close-button" id="close-button">CLOSE</button>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
